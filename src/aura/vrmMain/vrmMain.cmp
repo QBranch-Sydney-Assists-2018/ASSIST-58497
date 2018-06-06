@@ -1,0 +1,61 @@
+<aura:component controller="VrmController"
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes"
+                access="global">
+    <ltng:require
+            scripts="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js,https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.0/raphael-min.js"/>
+
+    <aura:attribute name="relationships" type="Object"/>
+    <aura:attribute name="activeTab" type="Map" default="{header: 'mapId', data: 'mappingTabData'}" />
+    <aura:attribute name="vrmMapping" type="Aura.Component[]"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="force:navigateToSObject" action="{!c.navigateToRecord}"/>
+
+    <div class="tabset slds-tabs_card uiTabset--base uiTabset--default uiTabset flexipageTabset">
+        <div class="slds-tabs_default">
+            <ul class="slds-tabs_default__nav" role="tablist">
+                <li aura:id="mapId"
+                    class="slds-tabs_default__item slds-text-title--caps slds-is-active customClassForTab" title="Map"
+                    role="presentation">
+                    <a class="slds-tabs_default__link" href="javascript:void(0);"
+                       onclick="{!c.handleTabClick}" role="tab" tabindex="0" aria-selected="true"
+                       aria-controls="tab-default-1" id="mapId" data-dataid="mappingTabData">Map</a>
+                </li>
+                <li aura:id="detailId" class="slds-tabs_default__item slds-text-title--caps customClassForTab"
+                    title="Detail" role="presentation">
+                    <a class="slds-tabs_default__link" href="javascript:void(0);"
+                       onclick="{!c.handleTabClick}" role="tab" tabindex="-1"
+                       aria-selected="false" aria-controls="tab-default-3"
+                       id="detailId" data-dataid="detailTabData">Detail</a>
+                </li>
+                <li aura:id="relatedId" class="slds-tabs_default__item slds-text-title--caps customClassForTab"
+                    title="Related" role="presentation">
+                    <a class="slds-tabs_default__link" href="javascript:void(0);"
+                       onclick="{!c.handleTabClick}" role="tab" tabindex="-1"
+                       aria-selected="false" aria-controls="tab-default-2"
+                       id="relatedId" data-dataid="relatedTabData">Related</a>
+                </li>
+            </ul>
+
+            <div aura:id="mappingTabData" name="tabdataName" id="tab-default-1"
+                 class="slds-tabs_default__content" role="tabpanel"
+                 aria-labelledby="map_linking">
+                <div aura:id="mapTabDataId" id="mapTabDataId">
+                    {!v.vrmMapping}
+                </div>
+            </div>
+
+            <div aura:id="detailTabData" name="tabdataName" id="tab-default-3"
+                 class="slds-tabs_default__content slds-hide" role="tabpanel"
+                 aria-labelledby="detail_linking">
+                <c:vrmDetail recordId="{!v.recordId}"/>
+            </div>
+
+            <div aura:id="relatedTabData" name="tabdataName" id="tab-default-2"
+                 class="slds-tabs_default__content slds-hide" role="tabpanel"
+                 aria-labelledby="related_linking">
+                <c:vrmRelated relationships="{!v.relationships}" recordId="{!v.recordId}"/>
+            </div>
+        </div>
+    </div>
+</aura:component>

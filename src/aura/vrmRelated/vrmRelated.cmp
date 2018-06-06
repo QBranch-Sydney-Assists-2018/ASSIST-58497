@@ -1,0 +1,72 @@
+<aura:component
+        implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes"
+        controller="VrmController" access="global">
+    <aura:attribute name="relationships" type="Object" access="public"/>
+    <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+        <thead>
+        <tr class="slds-text-title_caps">
+            <th scope="col">
+                <div class="slds-truncate" title="Person 1">Person 1</div>
+            </th>
+            <th scope="col">
+                <div class="slds-truncate" title="Person 1 Role">Person 1 Role</div>
+            </th>
+            <th scope="col">
+                <div class="slds-truncate" title="Person 2">Person 2</div>
+            </th>
+            <th scope="col">
+                <div class="slds-truncate" title="Person 2 Role">Person 2 Role</div>
+            </th>
+            <th scope="col">
+                <div class="slds-truncate" title="Concern">Concern</div>
+            </th>
+            <th scope="col">
+                <div class="slds-truncate" title="Actions"></div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <aura:iteration items="{!v.relationships.edges}" var="relationship" indexVar="index">
+            <!--<aura:if isTrue="{!relationship.Person_1.Id == v.recordId}">-->
+                <tr>
+                    <td scope="row" data-label="Person 1">
+                        <div class="slds-truncate"
+                             title="{!relationship.Person_1.FirstName + ' ' + relationship.Person_1.LastName }"><a
+                                    href="javascript:void(0);" onclick="{!c.viewRecord}" data-index="{!index}"
+                                    data-contact-index="1">{!relationship.Person_1.FirstName + ' ' + relationship.Person_1.LastName }</a>
+                        </div>
+                    </td>
+                    <td data-label="Person 1 Role">
+                        <div class="slds-truncate" title="{!relationship.Person_1_Role}">{!relationship.Person_1_Role}</div>
+                    </td>
+                    <td data-label="Person 2">
+                        <div class="slds-truncate"
+                             title="{!relationship.Person_2.FirstName + ' ' + relationship.Person_2.LastName }"><a
+                                    href="javascript:void(0);" onclick="{!c.viewRecord}" data-index="{!index}"
+                                    data-contact-index="2">{!relationship.Person_2.FirstName + ' ' + relationship.Person_2.LastName }</a>
+                        </div>
+                    </td>
+                    <td data-label="Person 2 Role">
+                        <div class="slds-truncate" title="{!relationship.Person_2_Role}">{!relationship.Person_2_Role}</div>
+                    </td>
+                    <td data-label="Concern">
+                        <div class="slds-truncate" title="Concern">{!relationship.Concern ? 'True' : 'False'}</div>
+                    </td>
+
+                    <td data-label="Actions">
+                        <!--<button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small" tabindex="-1" title="Show More">
+                            <lightning:icon iconName="utility:chevrondown" variant="chevrondown" size="x-small"/>
+                            <span class="slds-assistive-text">Show More</span>
+                        </button>-->
+                        <div class="slds-truncate" title="Edit"><a href="javascript:void(0);" onclick="{!c.editRecord}"
+                                                                   data-index="{!index}">Edit</a></div>
+
+                    </td>
+
+                </tr>
+            <!--</aura:if>-->
+        </aura:iteration>
+        </tbody>
+    </table>
+</aura:component>

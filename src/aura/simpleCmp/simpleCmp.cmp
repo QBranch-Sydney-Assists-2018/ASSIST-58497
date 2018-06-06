@@ -1,0 +1,8 @@
+<aura:component >
+    <aura:attribute name="message" type="String" />
+    <aura:attribute name="isLoaded" type="Boolean" default="false" />
+    <aura:handler name="render" value="{!this}" action="{!c.doInit}"/>
+
+	<span id="main" data-message="{!v.message}">qwerty - {!v.message}</span>
+   	<div id="sub">{!v.message}</div>
+</aura:component>
