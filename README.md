@@ -1,7 +1,6 @@
 
 <h2>
-    ASSIST-58497
-    <a href="https://org62.lightning.force.com/lightning/r/SSE_Assist__c/a300M000000swT9QAI/view" />
+    <a href="https://org62.lightning.force.com/lightning/r/SSE_Assist__c/a300M000000swT9QAI/view">ASSIST-58497</a>
 </h2>
 
 
